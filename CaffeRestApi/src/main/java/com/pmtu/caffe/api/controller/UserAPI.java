@@ -20,7 +20,6 @@ import java.util.List;
 public class UserAPI {
     ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
     UserService userService=(UserService)context.getBean("userService");
-
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public @ResponseBody List<UserEntity> list() {
         try {
