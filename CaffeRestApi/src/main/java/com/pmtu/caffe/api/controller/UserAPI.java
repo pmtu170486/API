@@ -1,5 +1,7 @@
 package com.pmtu.caffe.api.controller;
 
+import com.pmtu.caffe.api.BeanUtils.UserUtils;
+import com.pmtu.caffe.api.model.UserDTO;
 import com.pmtu.caffe.entity.UserEntity;
 import com.pmtu.caffe.service.Impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,9 @@ public class UserAPI {
     ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
     UserService userService=(UserService)context.getBean("userService");
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public @ResponseBody List<UserEntity> list() {
+    public @ResponseBody List<UserDTO> list() {
         try {
-            List<UserEntity> list = userService.getall();
+            List<UserDTO> list = new UserUtils().convertToListUserDTO(userService.getall());
             return list;
         } catch (Exception e) {
             e.printStackTrace();
